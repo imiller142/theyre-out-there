@@ -1,8 +1,10 @@
 ﻿const router = require('express').Router();
-const { User } = require('../../model');
 
-const userRoutes = require('./user');
 
+const userRoutes = require('./user-routes');
+const lakeRoutes = require('./lake-routes');
+
+router.use('/lakes', lakeRoutes);
 router.use('/users', userRoutes);
 
 
