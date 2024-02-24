@@ -1,6 +1,7 @@
 ﻿const { Model, DataTypes } = require('sequelize');
 
 const sequelize = require('../config/connection');
+const { Fish_db, Lakes} = require('./');
 
 class Fish_Available extends Model {
 
@@ -15,10 +16,22 @@ Fish_Available.init(
             autoIncrement: true
         },
         lake_id: {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
+            
+            references: {
+                model: 'lakes',
+
+                key: 'id',
+            }
         },
         fish_id: {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
+            
+            references: {
+                model: 'fish_db',
+
+                key: 'id'
+            }
         }
 
 },
