@@ -22,7 +22,7 @@ Fish_db.init(
             type: DataTypes.STRING,
             allowNull: false
         },
-        wikipedia_link: {
+        wiki_link: {
             type: DataTypes.STRING,
             allowNull: false
         }
