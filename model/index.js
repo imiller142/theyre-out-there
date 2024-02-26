@@ -18,6 +18,14 @@ Fish_Caught.belongsTo(Fish_db, {
     foreignKey: 'fish_id'
 })
 
+Fish_Caught.belongsTo(Lakes, {
+    foreignKey: 'lake_id'
+})
+
+Lakes.hasMany(Fish_Caught, {
+    foreignKey: 'lake_id'
+})
+
 Fish_Caught.belongsTo(User, {
     foreignKey: 'user_id'
 })
