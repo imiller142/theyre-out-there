@@ -41,4 +41,28 @@ router.get('/', (req, res) => {
     res.render('login', {layout: false});
   });
 
+router.get('/lakes', (req, res) => {
+  Lakes.findAll(
+  {
+    attributes: ['name', 'city', 'longitude', 'latitude']
+  })
+  .then(dbLakeData => {
+    if (!dbLakeData) {
+      res.status(404).json({ message: 'no lakes are currently in the data base please add one'});
+      return;
+    }
+
+    const lake = dbLakeData.map(lake => lake.get({ plain: true }));
+
+    res.render('lakes', {
+      lake
+    });
+  })
+  .catch(err => {
+    console.log(err);
+    res.status(500).json(err)
+  })
+})
+
+
 module.exports = router;
