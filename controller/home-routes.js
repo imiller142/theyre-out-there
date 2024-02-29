@@ -41,6 +41,10 @@ router.get('/', (req, res) => {
     res.render('login', {layout: false});
   });
 
+router.get('/signup', (req, res) => {
+  res.render('signup', {layout: false})
+})
+
 router.get('/lakes', (req, res) => {
   Lakes.findAll(
   {
