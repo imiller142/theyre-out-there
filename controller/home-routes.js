@@ -64,5 +64,8 @@ router.get('/lakes', (req, res) => {
   })
 })
 
+router.get('/lakes/add', (req, res) => {
+  res.render('add-lakes')
+})
 
 module.exports = router;
