@@ -59,7 +59,8 @@ router.get('/lakes', (req, res) => {
     const lake = dbLakeData.map(lake => lake.get({ plain: true }));
 
     res.render('lakes', {
-      lake
+      lake,
+      loggedIn: req.session.loggedIn
     });
   })
   .catch(err => {
@@ -69,7 +70,9 @@ router.get('/lakes', (req, res) => {
 })
 
 router.get('/lakes/add', (req, res) => {
-  res.render('add-lakes')
+  res.render('add-lakes', {
+    loggedIn: req.session.loggedIn
+  })
 })
 
 module.exports = router;
