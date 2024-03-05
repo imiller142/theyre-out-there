@@ -1,10 +1,10 @@
 ﻿<article class="lake card">
   <div class="title card-header">
-    {{name}}
+    <a href="/lakes/{{id}}">{{name}}</a>
   </div>
   <ul class="meta list-group list-group-flush">
-    <li class="list-group-item">{{city}}</li>
+    <a href="https://www.google.com/maps/?q={{latitude}},{{longitude}}" target="_blank"><li class="list-group-item">{{city}}</li></a>
     <li class="list-group-item">{{longitude}}</li>
     <li class="list-group-item">{{latitude}}</li>
-  </div>
+
 </article>

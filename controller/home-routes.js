@@ -48,7 +48,7 @@ router.get('/signup', (req, res) => {
 router.get('/lakes', (req, res) => {
   Lakes.findAll(
   {
-    attributes: ['name', 'city', 'longitude', 'latitude']
+    attributes: ['id', 'name', 'city', 'longitude', 'latitude']
   })
   .then(dbLakeData => {
     if (!dbLakeData) {
@@ -67,12 +67,39 @@ router.get('/lakes', (req, res) => {
     console.log(err);
     res.status(500).json(err)
   })
-})
+});
+
+
 
 router.get('/lakes/add', (req, res) => {
   res.render('add-lakes', {
     loggedIn: req.session.loggedIn
   })
-})
+});
+
+router.get('/lakes/:id', (req,res) =>{
+  Lakes.findOne(
+    {
+      attributes: ['name', 'city', 'longitude', 'latitude']
+    }
+  )
+  .then(dbLakeData => {
+    if (!dbLakeData) {
+      res.status(404).json({ message: 'no lakes are currently in the data base please add one'});
+      return;
+    }
+
+    const lake = dbLakeData.get({ plain: true });
+
+    res.render('single-lake', {
+      lake,
+      loggedIn: req.session.loggedIn
+    });
+  })
+  .catch(err => {
+    console.log(err);
+    res.status(500).json(err)
+  })
+});
 
 module.exports = router;
