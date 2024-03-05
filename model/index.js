@@ -52,6 +52,12 @@ Fish_Available.belongsTo(Fish_db, {
     foreignKey: 'fish_id'
 })
 
+Lakes.hasOne(Fish_Available, {
+    foreignKey: 'lake_id'
+})
 
+Fish_db.hasOne(Fish_Available, {
+    foreignKey: 'fish_id'
+})
 
 module.exports = { User, Lakes, Fish_Available, Fish_db, Fish_Caught }

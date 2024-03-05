@@ -48,6 +48,9 @@ router.get('/signup', (req, res) => {
 router.get('/lakes', (req, res) => {
   Lakes.findAll(
   {
+    include: {
+      model: Fish_db, as: 'fish_here'
+    },
     attributes: ['id', 'name', 'city', 'longitude', 'latitude']
   })
   .then(dbLakeData => {
