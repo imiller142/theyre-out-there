@@ -1,7 +1,28 @@
-﻿async function addLake {
-    const lakeName = document.querySelector('.lake-name').value.trim()
-    const response = await fetch('/api/lakes', {
-        method: 'post',
-        headers: { 'Content-Type': 'application/json' }
-      });
+﻿async function addLake(event) {
+    event.preventDefault()
+    const name = document.querySelector('.lake-name').value.trim();
+    const city = document.querySelector('.city').value.trim();
+    const latitude = document.querySelector('.latitude').value.trim();
+    const longitude = document.querySelector('.longitude').value.trim();
+
+    if (name && city && latitude && longitude) {
+      const response = await fetch('/api/lakes', {
+          method: 'post',
+          body: JSON.stringify({
+            name,
+            city,
+            latitude,
+            longitude
+          }),
+          headers: { 'Content-Type': 'application/json' }
+        });
+
+      if (response.ok) {
+        document.location.replace('/lakes');
+      } else {
+        alert(response.statusText);
+      }
+    }
 }
+
+document.querySelector('#add-lake').addEventListener('submit', addLake);
