@@ -17,7 +17,7 @@ Fish_Available.init(
         },
         lake_id: {
             type: DataTypes.INTEGER,
-            
+
             references: {
                 model: 'lakes',
 
@@ -26,7 +26,7 @@ Fish_Available.init(
         },
         fish_id: {
             type: DataTypes.INTEGER,
-            
+
             references: {
                 model: 'fish_db',
 
@@ -36,12 +36,6 @@ Fish_Available.init(
 
 },
 {
-    indexes: [
-        {
-            unique: true,
-            fields: ['lake_id', 'fish_id']
-        }
-    ],
     sequelize,
     timestamps: false,
     freezeTableName: true,

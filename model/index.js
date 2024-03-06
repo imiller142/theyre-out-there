@@ -32,32 +32,10 @@ Fish_Caught.belongsTo(User, {
 
 
 //lakes and fish associations
-Lakes.belongsToMany(Fish_db, {
-    through: Fish_Available,
-    as: 'fish_here',
-    foreignKey: 'lake_id'
-});
+Fish_Available.belongsTo(Fish_db, { foreignKey: 'fish_id'})
+Fish_Available.belongsTo(Lakes, { foreignKey: 'lake_id'})
 
-Fish_db.belongsToMany(Lakes, {
-    through: Fish_Available,
-    as: 'fish_here',
-    foreignKey: 'fish_id'
-})
-
-Fish_Available.belongsTo(Lakes, {
-    foreignKey: 'lake_id'
-})
-
-Fish_Available.belongsTo(Fish_db, {
-    foreignKey: 'fish_id'
-})
-
-Lakes.hasOne(Fish_Available, {
-    foreignKey: 'lake_id'
-})
-
-Fish_db.hasOne(Fish_Available, {
-    foreignKey: 'fish_id'
-})
+Lakes.belongsToMany(Fish_db, {as: 'Fish_in_lake', through: Fish_Available})
+Fish_db.belongsToMany(Lakes, {as: 'Available_in', through: Fish_Available})
 
 module.exports = { User, Lakes, Fish_Available, Fish_db, Fish_Caught }

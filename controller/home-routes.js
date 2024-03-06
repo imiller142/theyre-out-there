@@ -49,7 +49,8 @@ router.get('/lakes', (req, res) => {
   Lakes.findAll(
   {
     include: {
-      model: Fish_db, as: 'fish_here'
+      model: Fish_db,
+      as: 'Fish_in_lake'
     },
     attributes: ['id', 'name', 'city', 'longitude', 'latitude']
   })
@@ -60,7 +61,7 @@ router.get('/lakes', (req, res) => {
     }
 
     const lake = dbLakeData.map(lake => lake.get({ plain: true }));
-
+    console.log(lake)
     res.render('lakes', {
       lake,
       loggedIn: req.session.loggedIn
@@ -83,6 +84,10 @@ router.get('/lakes/add', (req, res) => {
 router.get('/lakes/:id', (req,res) =>{
   Lakes.findOne(
     {
+      include: {
+        model: Fish_db,
+        attributes: ['common_name']
+      },
       attributes: ['name', 'city', 'longitude', 'latitude']
     }
   )

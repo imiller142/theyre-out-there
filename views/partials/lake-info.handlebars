@@ -6,6 +6,10 @@
     <a href="https://www.google.com/maps/?q={{latitude}},{{longitude}}" target="_blank"><li class="list-group-item">{{city}}</li></a>
     <li class="list-group-item">{{longitude}}</li>
     <li class="list-group-item">{{latitude}}</li>
-    <li class="list-group-item">{{fish_db.common_name}}</li>
-
+  </ul>
+    <div class="card-title">
+      {{#each Fish_in_lake}}
+      <li class="list-group-item">{{common_name}}</li>
+      {{/each}}
+    </div>
 </article>
