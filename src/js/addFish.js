@@ -1,18 +1,11 @@
-﻿async function addFake(event) {
+﻿async function addFish(event) {
     event.preventDefault()
-    const name = document.querySelector('.lake-name').value.trim();
-    const city = document.querySelector('.city').value.trim();
-    const latitude = document.querySelector('.latitude').value.trim();
+    const common_name = document.querySelector('.common-name').value.trim();
+    const description = document.querySelector('.description').value.trim();
+    const wiki_link = document.querySelector('.wiki-link').value.trim();
 
 
-    if (latitude >  90 || latitude < -90) {
-      alert('Invalid Latitude')
-    }
-    else if (longitude > 180 || longitude < -180) {
-      alert('invalid longitude')
-    }
-    else{
-      if (name && city && latitude && longitude) {
+      if (common_name && description && wiki_link) {
         const response = await fetch('/api/fish', {
             method: 'post',
             body: JSON.stringify({
@@ -24,12 +17,12 @@
           });
 
         if (response.ok) {
-          document.location.replace('/lakes');
+          document.location.replace('/fish');
         } else {
           alert(response.statusText);
         }
       }
   }
-}
 
-document.querySelector('#add-lake').addEventListener('submit', addLake);
+
+document.querySelector('.fish-form').addEventListener('submit', addFish);

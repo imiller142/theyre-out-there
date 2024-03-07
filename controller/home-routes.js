@@ -110,4 +110,10 @@ router.get('/lakes/:id', (req,res) =>{
   })
 });
 
+router.get('/fish/add', (req, res) => {
+  res.render('add-fish', {
+    loggedIn: req.session.loggedIn
+  })
+})
+
 module.exports = router;
