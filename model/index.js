@@ -38,4 +38,5 @@ Fish_Available.belongsTo(Lakes, { foreignKey: 'lake_id'})
 Lakes.belongsToMany(Fish_db, {as: 'Fish_in_lake', through: Fish_Available})
 Fish_db.belongsToMany(Lakes, {as: 'Available_in', through: Fish_Available})
 
+
 module.exports = { User, Lakes, Fish_Available, Fish_db, Fish_Caught }

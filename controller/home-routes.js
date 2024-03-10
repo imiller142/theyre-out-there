@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const sequelize = require('../config/connection');
 const { Lakes, Fish_Available, Fish_db, User, Fish_Caught  } = require('../model');
+const getLakes = require('../utils/getLakes')
 
 router.get('/', (req, res) => {
     console.log(req.session);
@@ -116,8 +117,9 @@ router.get('/fish/add', (req, res) => {
   })
 })
 
-router.get('/add-catch', (req, res) => {
+router.get('/add-catch', getLakes(), (req, res) => {
   Fish_db.findAll({
+
   }
   )
   .then(dbFishData => {
@@ -127,27 +129,16 @@ router.get('/add-catch', (req, res) => {
     }
     const fish = dbFishData.map(fish => fish.get({ plain: true }));
     console.log(fish)
-  })
-  .then(Lakes.findAll({}))
-  .then(dbLakeData => {
-    if (!dbLakeData) {
-      res.status(404).json({ message: 'no lakes are currently in the data base'});
-      return;
-    }
-    const lake = dbLakeData.map(lake => lake.get({ plain: true }));
-    console.log(lake)
     res.render('add-catch', {
-      lake,
       fish,
       loggedIn: req.session.loggedIn
-    })
-  
+    });
+  })
   .catch(err => {
     console.log(err);
     res.status(500).json(err)
-    })
-  });
-})
+  })
+});
 
 router.get('/fish', (req, res) => {
   Fish_db.findAll({
