@@ -117,9 +117,12 @@ router.get('/fish/add', (req, res) => {
   })
 })
 
-router.get('/add-catch', getLakes(), (req, res) => {
-  Fish_db.findAll({
-
+router.get('/add-catch', (req, res) => {
+  Fish_Available.findAll({
+    include: {
+      model: Lakes,
+      model: Fish_db
+    }
   }
   )
   .then(dbFishData => {
@@ -142,7 +145,7 @@ router.get('/add-catch', getLakes(), (req, res) => {
 
 router.get('/fish', (req, res) => {
   Fish_db.findAll({
-    
+
     }
   )
   .then(dbFishData => {
@@ -151,7 +154,7 @@ router.get('/fish', (req, res) => {
       return;
     }
     const fish = dbFishData.map(fish => fish.get({ plain: true }));
-    
+
     res.render('fish', {
       fish,
       loggedIn: req.session.loggedIn

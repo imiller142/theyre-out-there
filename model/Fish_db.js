@@ -1,8 +1,13 @@
 ﻿const { Model, DataTypes } = require('sequelize');
-
+const { Fish_Available } = require('./')
 const sequelize = require('../config/connection');
 
 class Fish_db extends Model {
+    static ascFish(body, models) {
+        return models.Fish_Available.findOrCreate({
+          where: {fish_id: body.fish_id}
+        })
+      }
 
 }
 
@@ -33,7 +38,8 @@ Fish_db.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'fish_db'
+    modelName: 'fish_db',
+
     }
 )
 
