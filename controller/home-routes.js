@@ -13,15 +13,14 @@ router.get('/', (req, res) => {
 
         },
         {
-          model: User,
-          attributes: ['username']
+          model: Fish_db
         }
       ]
     })
       .then(dbPostData => {
         // pass a single post object into the homepage template
-        console.log(dbPostData[0]);
         const fish_caught = dbPostData.map(fish => fish.get({ plain: true }));
+        console.log(fish_caught)
         res.render('homepage', {
           fish_caught,
           loggedIn: req.session.loggedIn
@@ -118,22 +117,19 @@ router.get('/fish/add', (req, res) => {
 })
 
 router.get('/add-catch', (req, res) => {
-  Fish_Available.findAll({
-    include: {
-      model: Lakes,
-      model: Fish_db
-    }
-  }
-  )
+  Promise.all([Fish_db.findAll({}), Lakes.findAll({}) ])
   .then(dbFishData => {
     if (!dbFishData) {
       res.status(404).json({ message: 'no fish are currently in the data base'});
       return;
     }
-    const fish = dbFishData.map(fish => fish.get({ plain: true }));
+    const lakes = dbFishData[1].map(lakes => lakes.get({ plain: true }));
+    const fish = dbFishData[0].map(fish => fish.get( {plain: true }));
     console.log(fish)
+    console.log(lakes)
     res.render('add-catch', {
       fish,
+      lakes,
       loggedIn: req.session.loggedIn
     });
   })

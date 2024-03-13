@@ -27,7 +27,7 @@ router.put('/', (req, res) => {
         });
     }
   });
-  
+
 //this will create a new catch linked to a user and create all links between data basses if needed for new lakes and new fish
 // TODO: auth
 
@@ -37,7 +37,7 @@ router.post('/', (req,res) => {
     length: req.body.length,
     weight: req.body.weight,
     //Todo update to session auth
-    user_id: req.body.user_id,
+    user_id: req.session.user_id,
     lake_id: req.body.lake_id,
     fish_id: req.body.fish_id
   })

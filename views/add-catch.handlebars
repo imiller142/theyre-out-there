@@ -5,16 +5,11 @@
     <div class="mt-5">
         <form class="add-lake" id = "add-lake">
             <div class="form-outline mt-5 mb-4">
-                <input type="text" class="form-control w-50 mt-5 lake-name"/>
-                <label class="mt-1">Lake Name</label>
-            </div>
-
-            <div class="form-outline mt-5 mb-4">
-                <input type="text" class="form-control w-50 mt-5 length"/>
+                <input type="text" class="form-control w-50 mt-5 length" id="length"/>
                 <label class="mt-1">Length</label>
             </div>
             <div class="form-outline mt-5 mb-4">
-                <input type="text" class="form-control w-50 mt-5 weight"/>
+                <input type="text" class="form-control w-50 mt-5 weight" id="weight"/>
                 <label class="mt-1">Weight</label>
             </div>
             <div class="input-group mb-3 w-50">
@@ -25,9 +20,18 @@
                     {{> fish-options}}
                 </select>
             </div>
+                        <div class="input-group mb-3 w-50">
+                <div class="input-group-prepend w-50">
+                    <label class="input-group-text w-100" for="inputGroupSelect02">Lakes</label>
+                </div>
+                <select class="custom-selects w-50 select" id="inputGroupSelect02">
+                    {{> lake-options}}
+                </select>
+            </div>
             <div class="form-outline mt-5 mb-4">
-                <button type="submit" class="btn">Submit</button>
+                <button type="submit" class="btn" id="btn">Submit</button>
             </div>
         </form>
     </div>
 </div>
+<script src="/js/addCatch.js"></script>
