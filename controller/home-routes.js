@@ -1,12 +1,19 @@
 const router = require('express').Router();
 const sequelize = require('../config/connection');
 const { Lakes, Fish_Available, Fish_db, User, Fish_Caught  } = require('../model');
-const getLakes = require('../utils/getLakes')
+const withAuth = require('../utils/withAuth');
+
 
 router.get('/', (req, res) => {
     console.log(req.session);
     Fish_Caught.findAll({
+      order: [['weight', 'DESC']],
       include: [
+        {
+          model: User,
+          attributes: ['username'],
+          
+        },
         {
           model: Lakes,
           attributes: ['id', 'name', 'city'],
@@ -75,7 +82,7 @@ router.get('/lakes', (req, res) => {
 
 
 
-router.get('/lakes/add', (req, res) => {
+router.get('/lakes/add', withAuth, (req, res) => {
   res.render('add-lakes', {
     loggedIn: req.session.loggedIn
   })

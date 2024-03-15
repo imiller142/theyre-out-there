@@ -1,8 +1,26 @@
-<article class="post">
-  <div class="title">
-    <h1>{{lake.name}}</h1>
-  </div>
-  <div class="meta">
-    <a href="api/catch/{{id}}">{{species}}</a>
-   </div>
-</article>
+
+
+<tbody>
+  <tr>
+    <td>
+      <div class="d-flex align-items-center">
+        <span class="fs-6 bsb-w-35 bsb-h-35 text-bg-primary rounded-circle d-flex align-items-center justify-content-center me-2">
+          <i class="bi bi-twitter-x"></i>
+        </span>
+        <div>
+          <h6 class="m-0">{{species}}</h6>
+        </div>
+      </div>
+    </td>
+    <td>
+      <h6 class="mb-1">{{length}}</h6>
+    </td>
+    <td>
+      <h6 class="mb-1">{{weight}}</h6>
+    </td>
+    <td>
+      <h6 class="mb-1">{{lake.name}}</h6>
+    </td>
+    <td>{{user.username}}</td>
+  </tr>
+</tbody>
