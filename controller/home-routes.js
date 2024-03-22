@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
         {
           model: User,
           attributes: ['username'],
-          
+
         },
         {
           model: Lakes,
@@ -117,13 +117,13 @@ router.get('/lakes/:id', (req,res) =>{
   })
 });
 
-router.get('/fish/add', (req, res) => {
+router.get('/fish/add', withAuth, (req, res) => {
   res.render('add-fish', {
     loggedIn: req.session.loggedIn
   })
 })
 
-router.get('/add-catch', (req, res) => {
+router.get('/add-catch', withAuth, (req, res) => {
   Promise.all([Fish_db.findAll({}), Lakes.findAll({}) ])
   .then(dbFishData => {
     if (!dbFishData) {
@@ -145,6 +145,41 @@ router.get('/add-catch', (req, res) => {
     res.status(500).json(err)
   })
 });
+
+router.get('/catch/edit', withAuth, (req, res) => {
+  Fish_Caught.findAll({
+    where: {
+      user_id: req.session.user_id
+    },
+    include: [
+      {
+        model: User,
+        attributes: ['username'],
+
+      },
+      {
+        model: Lakes,
+        attributes: ['id', 'name', 'city'],
+
+      },
+      {
+        model: Fish_db
+      }
+    ]
+  })
+  .then(dbCatchData => {
+    const fish_caught = dbCatchData.map(catchs => catchs.get({ plain: true}));
+    console.log(fish_caught)
+    res.render('edit-catches', {
+      fish_caught,
+      loggedIn: req.session.loggedIn
+    })
+  })
+  .catch(err => {
+    console.log(err);
+    res.status(500).json(err)
+  })
+})
 
 router.get('/fish', (req, res) => {
   Fish_db.findAll({

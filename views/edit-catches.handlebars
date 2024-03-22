@@ -1,0 +1,31 @@
+﻿<section class="py-3 py-md-5">
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-9 col-xl-8">
+        <div class="card widget-card border-light shadow-sm">
+          <div class="card-body p-4">
+            <h5 class="card-title widget-card-title mb-4">Your Catches</h5>
+            <div class="table-responsive">
+              <table class="table table-borderless bsb-table-xl text-nowrap align-middle m-0">
+                <thead>
+                  <tr>
+                    <th>Fish Species</th>
+                    <th>Length</th>
+                    <th>Weight</th>
+                    <th>Lake Caught On</th>
+                    <th>Caught By</th>
+                  </tr>
+                  {{#each fish_caught as |fish|}}
+                    <div>
+                      {{> fish_caught fish}}
+                    </div>
+                  {{/each}}
+                </thead>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
